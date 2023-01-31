@@ -1,0 +1,321 @@
+{
+	"info": {
+		"_postman_id": "fd72a32d-b490-4e7c-9313-7e350e631ff2",
+		"name": "Tsveti_First_Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25580761"
+	},
+	"item": [
+		{
+			"name": "Issues",
+			"item": [
+				{
+					"name": "POST",
+					"item": [
+						{
+							"name": "POST Issue 4",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Check issue number\", function(){\r",
+											"   let body = pm.response.json();\r",
+											"   pm.expect(body.number, \"Number property\").greaterThan(0);\r",
+											"   pm.expect(body.title, \"Title property\").equal(\"ïssue from POSTMAN 5\");\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "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",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "dingyda",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"title\": \"Forth issue\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.github.com/repos/dingyda/Postman/issues",
+									"protocol": "https",
+									"host": [
+										"api",
+										"github",
+										"com"
+									],
+									"path": [
+										"repos",
+										"dingyda",
+										"Postman",
+										"issues"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Issue with labels",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "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",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "dingyda",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Issue with labels\",\r\n    \"labels\": [\"bug\", \"priority:critical\", \"mylable\" ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.github.com/repos/dingyda/Postman/issues",
+									"protocol": "https",
+									"host": [
+										"api",
+										"github",
+										"com"
+									],
+									"path": [
+										"repos",
+										"dingyda",
+										"Postman",
+										"issues"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GET",
+					"item": [
+						{
+							"name": "GET github issue 1",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Check status code\", function(){\r",
+											"   pm.response.to.have.status(200); \r",
+											"})\r",
+											"\r",
+											"pm.test(\"Check issue number\", function(){\r",
+											"   const body = pm.response.json();\r",
+											"   pm.expect(body.number, \"Number property\").to.be.equal(1);\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.github.com/repos/dingyda/Postman/issues/1",
+									"protocol": "https",
+									"host": [
+										"api",
+										"github",
+										"com"
+									],
+									"path": [
+										"repos",
+										"dingyda",
+										"Postman",
+										"issues",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET github all issue",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Check is response is an array of issues\", function () {\r",
+											"    const body = pm.response.json();\r",
+											"    console.log(\"BODY\", body);\r",
+											"    pm.expect(Array.isArray(body));\r",
+											"\r",
+											"    for (let item of body){\r",
+											"        pm.expect(typeof(item.title)).equals(\"string\");\r",
+											"        pm.expect(typeof(item.number)).equals(\"number\")\r",
+											"    }\r",
+											"})\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.github.com/repos/dingyda/Postman/issues",
+									"protocol": "https",
+									"host": [
+										"api",
+										"github",
+										"com"
+									],
+									"path": [
+										"repos",
+										"dingyda",
+										"Postman",
+										"issues"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Repositories",
+			"item": [
+				{
+					"name": "GET_All_Repos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.github.com/users/dingyda/repos",
+							"protocol": "https",
+							"host": [
+								"api",
+								"github",
+								"com"
+							],
+							"path": [
+								"users",
+								"dingyda",
+								"repos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET_Single_Repos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Repo Name\", function(){\r",
+									"    const body = pm.response.json();\r",
+									"    pm.expect(body.name, \"Name property\").equals(\"Postman\");\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.github.com/repos/dingyda/postman",
+							"protocol": "https",
+							"host": [
+								"api",
+								"github",
+								"com"
+							],
+							"path": [
+								"repos",
+								"dingyda",
+								"postman"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET__Repos_Commits",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.github.com/repos/dingyda/Postman/commits",
+							"protocol": "https",
+							"host": [
+								"api",
+								"github",
+								"com"
+							],
+							"path": [
+								"repos",
+								"dingyda",
+								"Postman",
+								"commits"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
